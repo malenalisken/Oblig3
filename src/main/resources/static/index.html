@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oblig 3</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form class="form">
+                <h3>Bestilling av Billetter</h3>
+                <div class="form-group dropdown">
+                    <label for="velgFilm">Velg film her:</label>
+                    <div id="velgFilm" class="dropdown" onchange="sjekkValgtFilm()"></div>
+                    <!--kom tilbake hit-->
+                    <span id="ingenFilm" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="antall">Antall biletter</label>
+                    <input onchange="sjekkAntall()" id="antall" class="form-control" type="number">
+                    <span id="feilAntall" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="fornavn">Fornavn</label>
+                    <input onchange="sjekkFornavn()" id="fornavn" class="form-control" type="text">
+                    <span id="feilFornavn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="etternavn">Etternavn</label>
+                    <input onchange="sjekkEtternavn()" id="etternavn" class="form-control" type="text">
+                    <span id="feilEtternavn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="telefonnr">Telefonnr</label>
+                    <input onchange="sjekkTelefonnr()" id="telefonnr" class="form-control" type="text">
+                    <span id="feilTelefonnr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="epost">Epost</label>
+                    <input onchange="sjekkEpost()" id="epost" class="form-control" type="text">
+                    <span id="feilEpost" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button onclick="validateForm()" type="button" class="btn btn-primary">Kjøp Billett</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <h3>Bestillte Billetter</h3>
+            <div id="utskrift"></div>
+            <button onclick="slettAlle()" type="button" class="btn btn-danger">Slett alle billetter</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
