@@ -1,8 +1,10 @@
-$(function() {
+$(function() { //ready funksjon, starter når siden er lastet
     hentAlleFilmer();
     hentAlle();
 });
-function hentAlleFilmer(){
+
+
+function hentAlleFilmer(){ //henter filmer fra database gjennom controller
     $.get("/hentFilmer",function (filmer){
         formaterFilmer(filmer);
         console.log(filmer);
@@ -61,15 +63,15 @@ function formaterData(billetter){
     $("#utskrift").html(ut);
 }
 function idEndring(id){
-    window.location.href = "/endring.html?"+id;
+    window.location.href = "/endring.html?"+id; //sender til endring.html
 }
-function slettEnBillett(id) {
+function slettEnBillett(id) { //sletter kunn billett med samme id som ønsket billett
     const url = "/slettEnBillett?id="+id;
     $.get( url, function() {
         window.location.href = "/";
     });
 }
-function slettAlle(){
+function slettAlle(){ //sletter alle billetter og laster inn tabellen på nytt(tomt)
     $.get("/slettAlle",function (){
         hentAlle();
     })
@@ -81,7 +83,7 @@ function sjekkValgtFilm(){
     }else{
         return true
     }
-}
+} //valideringer
 function sjekkAntall(){
     let input=Number($("#antall").val());
     if (isNaN(input) || input <= 0){
@@ -155,4 +157,4 @@ function validateForm(){
         }
         lagreBillett();
     }
-}
+}//registrerer billetten om alle valideringer er godkjente
