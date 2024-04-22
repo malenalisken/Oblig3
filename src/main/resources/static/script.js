@@ -46,13 +46,14 @@ function hentAlle(){
 function formaterData(billetter){
     let ut = "<table class='table table-striped'><tr>" +
         "<th>Film</th><th>Antall</th><th>Fornavn</th>" +
-        "<th>Etternavn</th><th>Telefonnr</th><th>Epost</th><th></th>" +
-        "<</tr>";
+        "<th>Etternavn</th><th>Telefonnr</th><th>Epost</th><th></th><th></th>" +
+        "</tr>";
     for (const b of billetter){
         ut+= "<tr><td>" + b.film + "</td><td>" + b.antall + "</td>" +
             "<td>" + b.fornavn + "</td><td>" + b.etternavn + "</td>" +
             "<td>" + b.telefonnr + "</td><td>" + b.epost + "</td>" +
-            "<td><button class='btn btn-primary' onclick='idEndring("+b.id+")'>Endre</button" +
+            "<td><button class='btn btn-primary' onclick='idEndring("+b.id+")'>Endre</button>" +
+            "<td><button class='btn btn-danger' onclick='slettEnBillett("+b.id+")'>Slett</button>" +
             "</tr>";
 
     }
@@ -61,7 +62,12 @@ function formaterData(billetter){
 }
 function idEndring(id){
     window.location.href = "/endring.html?"+id;
-    console.log("alt i orden med idEndring funksjonen i script");
+}
+function slettEnBillett(id) {
+    const url = "/slettEnBillett?id="+id;
+    $.get( url, function() {
+        window.location.href = "/";
+    });
 }
 function slettAlle(){
     $.get("/slettAlle",function (){

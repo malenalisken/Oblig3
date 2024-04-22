@@ -46,4 +46,8 @@ public class BillettController {
 
         rep.slettAlleBilleter();
     }
+    @GetMapping("/slettEnBillett")
+    public void slettEnBillett(int id){
+        rep.slettEnBillett(id);
+    }
 }
