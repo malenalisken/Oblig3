@@ -4,7 +4,7 @@ OsloMet brukernavn: malis0057
 
 GitHub brukernavn: malenalisken
 
-GitHub repo URL: https://github.com/malenalisken/Oblig1
+GitHub repo URL: https://github.com/malenalisken/Oblig3
 
 Fullt navn: Malena Amelie Lisken
 
