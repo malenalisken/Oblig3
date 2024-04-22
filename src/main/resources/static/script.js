@@ -9,7 +9,7 @@ function hentAlleFilmer(){
     });
 }
 function formaterFilmer(filmer){
-    let ut = "<select id='valgtFilm' class='dropdown' onchange='hentVerdi()'>"
+    let ut = "<select id='valgtFilm' class='dropdown' >"
     ut+="<option disabled selected>Velg Film</option>";
     console.log(filmer);
     for (const f of filmer){
@@ -17,10 +17,6 @@ function formaterFilmer(filmer){
     }
     ut+="</select>";
     $("#velgFilm").html(ut);
-}
-function hentVerdi(){
-    console.log($("#valgtFilm").val());
-    console.log("hei");
 }
 
 function lagreBillett(){
@@ -87,25 +83,25 @@ function sjekkAntall(){
 }
 function sjekkFornavn(){
     let input = $("#fornavn").val();
-    const pattern = /^[A-Z][a-zA-Z]{1,}$/;
+    const pattern = /^[a-zA-Z]{1,}$/;
     let validFornavn = pattern.test(input);
     if (validFornavn){
         $("#feilFornavn").text("");
         return true;
     } else {
-        $("#feilFornavn").text("Må starte med stor bokstav, ingen andre tegn");
+        $("#feilFornavn").text("Kun bostaver, ingen andre tegn");
         return false;
     }
 }
 function sjekkEtternavn(){
     let input = $("#etternavn").val();
-    const pattern = /^[A-Z][a-zA-Z]{1,}$/;
+    const pattern = /^[a-zA-Z]{1,}$/;
     let validFornavn = pattern.test(input);
     if (validFornavn){
         $("#feilEtternavn").text("");
         return true;
     } else {
-        $("#feilEtternavn").text("Må starte med stor bokstav, ingen andre tegn");
+        $("#feilEtternavn").text("Kun bostaver, ingen andre tegn");
         return false;
     }
 }
