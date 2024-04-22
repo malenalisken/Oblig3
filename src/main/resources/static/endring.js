@@ -1,6 +1,6 @@
 $(function() {
     hentAlleFilmer();
-    hentAlle();
+    hentEnBillett();
 });
 function hentAlleFilmer(){
     $.get("/hentFilmer",function (filmer){
@@ -10,7 +10,6 @@ function hentAlleFilmer(){
 }
 function formaterFilmer(filmer){
     let ut = "<select id='valgtFilm' class='dropdown' >"
-    ut+="<option disabled selected>Velg Film</option>";
     console.log(filmer);
     for (const f of filmer){
         ut+= "<option>" + f.navn + "</option>";
@@ -18,56 +17,36 @@ function formaterFilmer(filmer){
     ut+="</select>";
     $("#velgFilm").html(ut);
 }
+function hentEnBillett(){
+    const id= window.location.search.substring(1);
+    const url = "/hentEnBillett?id=" + id;
+    $.get(url,function (enBillett){
+        $("#id").val(enBillett.id);
+        $("#valgtFilm").val(enBillett.film);
+        $("#antall").val(enBillett.antall);
+        $("#fornavn").val(enBillett.fornavn);
+        $("#etternavn").val(enBillett.etternavn);
+        $("#telefonnr").val(enBillett.telefonnr);
+        $("#epost").val(enBillett.epost);
 
-function lagreBillett(){
+    });
+}
+function endreBillett(){
     const billett = {
+        id: $("#id").val(),
         film : $("#valgtFilm").val(),
         antall : $("#antall").val(),
         fornavn : $("#fornavn").val(),
         etternavn : $("#etternavn").val(),
         telefonnr : $("#telefonnr").val(),
         epost : $("#epost").val(),
-    }
-    $.post("/lagre",billett,function(){
-        hentAlle();
+    };
+    $.post("/endre", billett, function (){
     });
-    $("#valgtFilm").val("");
-    $("#antall").val("");
-    $("#fornavn").val("");
-    $("#etternavn").val("");
-    $("#telefonnr").val("");
-    $("#epost").val("");
-}
-function hentAlle(){
-    $.get("/hentAlle", function(billetter){
-        formaterData(billetter);
-    });
-}
-function formaterData(billetter){
-    let ut = "<table class='table table-striped'><tr>" +
-        "<th>Film</th><th>Antall</th><th>Fornavn</th>" +
-        "<th>Etternavn</th><th>Telefonnr</th><th>Epost</th><th></th>" +
-        "<</tr>";
-    for (const b of billetter){
-        ut+= "<tr><td>" + b.film + "</td><td>" + b.antall + "</td>" +
-            "<td>" + b.fornavn + "</td><td>" + b.etternavn + "</td>" +
-            "<td>" + b.telefonnr + "</td><td>" + b.epost + "</td>" +
-            "<td><button class='btn btn-primary' onclick='idEndring("+b.id+")'>Endre</button" +
-            "</tr>";
 
-    }
-    ut+= "</table>";
-    $("#utskrift").html(ut);
+    window.location.href="/";
 }
-function idEndring(id){
-    window.location.href = "/endring.html?"+id;
-    console.log("alt i orden med idEndring funksjonen i script");
-}
-function slettAlle(){
-    $.get("/slettAlle",function (){
-        hentAlle();
-    })
-}
+
 function sjekkValgtFilm(){
     let film = $("#valgtFilm").val();
     if (film === "" || film === null){
@@ -147,6 +126,6 @@ function validateForm(){
         }else{
             $("#ingenFilm").text("")
         }
-        lagreBillett();
+        endreBillett();
     }
 }

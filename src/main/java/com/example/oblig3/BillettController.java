@@ -32,6 +32,14 @@ public class BillettController {
 
         return rep.hentAlleBilletter();
     }
+    @GetMapping("/hentEnBillett")
+    public Billett henteEnBillett(int id){
+        return rep.hentEnBillett(id);
+    }
+    @PostMapping("/endre")
+    public void endre(Billett billett) {
+        rep.endreBillett(billett);
+    }
 
     @GetMapping("/slettAlle")
     public void slettAlle(){

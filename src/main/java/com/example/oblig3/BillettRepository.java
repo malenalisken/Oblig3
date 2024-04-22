@@ -23,6 +23,16 @@ public class BillettRepository {
         List<Billett> alleBilletter = db.query(sql, new BeanPropertyRowMapper(Billett.class));
         return alleBilletter;
     }
+    public Billett hentEnBillett (int id){
+        String sql= "SELECT * FROM Billett WHERE id=?";
+        List<Billett> enBillett = db.query(sql, new BeanPropertyRowMapper(Billett.class), id);
+        return enBillett.get(0);
+    }
+    public void endreBillett(Billett billett){
+        String sql = "UPDATE Billett SET film=?, antall=?, fornavn=?, etternavn=?, telefonnr=?, epost=? WHERE id=?";
+        db.update(sql, billett.getFilm(), billett.getAntall(), billett.getFornavn(),
+                billett.getEtternavn(), billett.getTelefonnr(), billett.getEpost(), billett.getId());
+    }
     public void slettAlleBilleter(){
         String sql ="DELETE FROM Billett";
         db.update(sql);
